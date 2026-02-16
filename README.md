@@ -11,7 +11,7 @@ This repo provides a reproducible Docker Compose stack for running **Open Notebo
 1. Clone the repo:
    ```bash
    git clone https://github.com/ghassenbenali96/OpenNotebook-Local.git
-   cd OpenNotebook-Local
+   cd OpenNotebook-Local-main
    ```
 2. Create .env with a secure encryption key:
    ```bash
