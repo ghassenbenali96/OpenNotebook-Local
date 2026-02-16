@@ -1,0 +1,38 @@
+services:
+  surrealdb:
+    image: surrealdb/surrealdb:v2
+    command: start --user root --pass password --bind 0.0.0.0:8000 rocksdb:/mydata/mydatabase.db
+    user: root  # Required for bind mounts on Linux (SurrealDB runs as non-root by default)
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./surreal_data:/mydata
+
+  open_notebook:
+    image: lfnovo/open_notebook:v1-latest
+    pull_policy: always
+    ports:
+      - "8502:8502"
+      - "5055:5055"
+    environment:
+      - OPEN_NOTEBOOK_ENCRYPTION_KEY=${OPEN_NOTEBOOK_ENCRYPTION_KEY}
+
+      # Database
+      - SURREAL_URL=ws://surrealdb:8000/rpc
+      - SURREAL_USER=root
+      - SURREAL_PASSWORD=password
+      - SURREAL_NAMESPACE=open_notebook
+      - SURREAL_DATABASE=open_notebook
+
+      # Ollama API (local host)
+      - OLLAMA_API_BASE=http://host.docker.internal:11434
+      - OLLAMA_CHAT_MODEL=llama2
+      - OLLAMA_EMBEDDING_MODEL=mxbai-embed-large
+      - OLLAMA_TRANSFORM_MODEL=llama2
+    volumes:
+      - ./notebook_data:/app/data
+    depends_on:
+      - surrealdb
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # Required on Linux
