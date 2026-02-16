@@ -10,7 +10,7 @@ This repo provides a reproducible Docker Compose stack for running **Open Notebo
 ## Setup
 1. Clone the repo:
    ```bash
-   git clone [https://github.com/<your-username>/compose-open-notebook-surrealdb.git](https://github.com/ghassenbenali96/OpenNotebook-Local.git)
+   git clone https://github.com/ghassenbenali96/OpenNotebook-Local.git
    cd OpenNotebook-Local
    ```
 2. Create .env with a secure encryption key:
