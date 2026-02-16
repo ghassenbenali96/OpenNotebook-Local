@@ -36,6 +36,7 @@ Default models are set in docker-compose.yml:
 - Chat → llama2
 - Embedding → mxbai-embed-large
 - Transformation → llama2
+
 You can override these in the Open Notebook settings UI once the app is running.
 
 ## Data Persistence
